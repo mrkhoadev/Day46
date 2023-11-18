@@ -29,7 +29,15 @@ export default function Pagination() {
     } else {
       page = 1; 
       navigate(`/product/1`);
-    }  
+      (async () => {
+        await dispatch(
+          getProducts({
+            limit: PAGE_LIMIT,
+            page: 1,
+          })
+        );
+      })();
+    } 
   }, [page]);
   validCurrentPage.current = Math.min(!isNaN(+page) ? +page : 1, totalPage);
   const handlePageClick = (event) => {
