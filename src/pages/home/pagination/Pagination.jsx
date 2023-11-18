@@ -14,23 +14,25 @@ export default function Pagination() {
   let { page } = useParams();
   const navigate = useNavigate();
 
-  const validCurrentPage = useRef(Math.min(+page, totalPage));
+  const validCurrentPage = useRef(Math.min(!isNaN(+page) ? +page : 1, totalPage));
 
   useLayoutEffect(() => {
-    if (!Number.isInteger(+page) || (+page < 1 && +page > totalPage)) {
-      page = 1;
+    const pageParams = +page
+    if (!isNaN(pageParams) || (pageParams > 0 && pageParams <= totalPage)) {
+      (async () => {
+        await dispatch(
+          getProducts({
+            limit: PAGE_LIMIT,
+            page: +page,
+          })
+        );
+      })();
+    } else {
+      page = 1; 
       navigate(`/product/1`);
-    }
-    (async () => {
-      await dispatch(
-        getProducts({
-          limit: PAGE_LIMIT,
-          page: +page,
-        })
-      );
-    })();
+    }  
   }, [page]);
-  validCurrentPage.current = Math.min(+page, totalPage);
+  validCurrentPage.current = Math.min(!isNaN(+page) ? +page : 1, totalPage);
   const handlePageClick = (event) => {
     navigate(`/product/${event.selected + 1}`);
     page = event.selected + 1;
