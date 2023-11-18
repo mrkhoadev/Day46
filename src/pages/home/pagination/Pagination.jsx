@@ -26,18 +26,21 @@ export default function Pagination() {
         navigate(`product/${event.selected + 1}`);
         page = event.selected + 1;
     };
+    const validCurrentPage = Math.min(page, totalPage);
+    
     return (
-        <div className="pagination">
-            <ReactPaginate
-                breakLabel="..."
-                nextLabel={<i className="bx bx-chevron-right"></i>}
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={3}
-                pageCount={totalPage}
-                previousLabel={<i className="bx bx-chevron-left"></i>}
-                renderOnZeroPageCount={null}
-                activeLinkClassName="active"
-            />
-        </div>
+      <div className="pagination">
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel={<i className="bx bx-chevron-right"></i>}
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          pageCount={totalPage}
+          previousLabel={<i className="bx bx-chevron-left"></i>}
+          renderOnZeroPageCount={null}
+          activeLinkClassName="active"
+          forcePage={validCurrentPage - 1}
+        />
+      </div>
     );
 }
