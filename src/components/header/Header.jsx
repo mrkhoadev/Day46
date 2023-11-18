@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import style from "./header.module.scss";
+import style from "./Header.module.scss";
 import clsx from "clsx";
 import CartButton from "./cart/CartButton";
 import { Link } from "react-router-dom";
