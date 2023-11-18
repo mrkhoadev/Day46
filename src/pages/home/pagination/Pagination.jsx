@@ -13,7 +13,6 @@ export default function Pagination() {
   const totalPage = useSelector((state) => state.products.totalPage);
   let { page } = useParams();
   const navigate = useNavigate();
-
   const validCurrentPage = useRef(Math.min(!isNaN(+page) ? +page : 1, totalPage));
 
   useLayoutEffect(() => {
