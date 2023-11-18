@@ -41,7 +41,7 @@ export default function ProductDetails() {
                     <div className="row">
                         <div className="col-12">
                             <h2>
-                                <Link to="/">Home</Link>
+                                <Link to="/product/1">Home</Link>
                                 <i className="bx bx-chevron-right"></i>
                                 Chi tiết
                             </h2>

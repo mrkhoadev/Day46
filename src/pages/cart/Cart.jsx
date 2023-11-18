@@ -21,7 +21,7 @@ export default function Cart() {
                     alt=""
                 />
                 <p>Giỏ hàng của bạn còn trống</p>
-                <Link to="/">Mua ngay</Link>
+                <Link to="/product/1">Mua ngay</Link>
             </div>
         );
     }
@@ -32,7 +32,7 @@ export default function Cart() {
                     <div className="row">
                         <div className="col-12">
                             <h2>
-                                <Link to="/">Home</Link>
+                                <Link to="/product/1">Home</Link>
                                 <i className="bx bx-chevron-right"></i>
                                 Giỏ hàng
                             </h2>

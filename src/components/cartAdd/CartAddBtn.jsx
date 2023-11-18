@@ -6,7 +6,6 @@ import { addCart } from "../../redux/slice/productSlice";
 
 export default function CartAddBtn({ data, sale }) {
     const inputValue = useSelector((state) => state.products.inputValue);
-    const cartList = useSelector((state) => state.products.cartList);
     const dispatch = useDispatch();
     const handleClick = (e) => {
         e.preventDefault();
@@ -21,10 +20,9 @@ export default function CartAddBtn({ data, sale }) {
             quantity: inputValue,
             updatedAt: data.updatedAt,
             sale: sale,
-        };console.log(product);
+        };
         dispatch(addCart(product));
     };
-    // console.log(cartList);
     return (
         <button
             className={clsx(style["cart-add"])}
