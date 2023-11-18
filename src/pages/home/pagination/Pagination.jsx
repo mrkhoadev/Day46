@@ -17,7 +17,7 @@ export default function Pagination() {
 
   useLayoutEffect(() => {
     const pageParams = +page
-    if (!isNaN(pageParams) || (pageParams > 0 && pageParams <= totalPage)) {
+    if (!isNaN(pageParams) && pageParams > 0 && pageParams <= totalPage) {
       (async () => {
         await dispatch(
           getProducts({
@@ -27,7 +27,7 @@ export default function Pagination() {
         );
       })();
     } else {
-      page = 1; 
+      page = 1;
       navigate(`/product/1`);
       (async () => {
         await dispatch(
