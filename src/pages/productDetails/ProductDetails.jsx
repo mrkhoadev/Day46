@@ -23,9 +23,7 @@ export default function ProductDetails() {
     const { id } = useParams();
     const dispatch = useDispatch();
     useLayoutEffect(() => { 
-        (async () => {
-            await dispatch(getProductDetails(id));
-        })();
+        dispatch(getProductDetails(id));
     }, []);
     if (status === "error") {
         return <Error />;

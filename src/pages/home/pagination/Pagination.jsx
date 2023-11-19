@@ -15,13 +15,12 @@ export default function Pagination() {
   const navigate = useNavigate();
   const validCurrentPage = useRef(Math.min(!isNaN(+page) ? +page : 1, totalPage));
   const getData = async (pageParams) => {
-    const data = await dispatch(
+    dispatch(
       getProducts({
         limit: PAGE_LIMIT,
         page: pageParams,
       })
     );
-    return data;
   };
 
   useEffect(() => {
