@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import config from "../../../api/config";
 import ReactPaginate from "react-paginate";
 import { useParams, useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ export default function Pagination() {
   const dispatch = useDispatch();
   const totalPage = useSelector((state) => state.products.totalPage);
   const { page } = useParams();
+  const prevPage = useRef(0);
   const navigate = useNavigate();
   const validCurrentPage = useRef(0);
   const getData = (pageParams) => {
@@ -25,15 +26,22 @@ export default function Pagination() {
 
   useEffect(() => {
     const pageParams = +page;
-    if (!isNaN(pageParams) && pageParams > 0) {
-      getData(pageParams);
-    } else {
-      navigate(`/product/1`);
-      getData(1);
-    }
-    if (pageParams > totalPage && totalPage !== 0) {
+
+    if (pageParams !== prevPage.current) {
+      if (!isNaN(pageParams) && pageParams > 0) {
+        if (pageParams < totalPage || totalPage === 0) {
+          getData(pageParams);
+        } else {
+          navigate(`/product/${totalPage}`);
+          getData(totalPage);
+        }
+      } else {
+        navigate(`/product/1`);
+        getData(1);
+      }
+      prevPage.current = pageParams;
+    } else if (pageParams > totalPage && totalPage !== 0) {
       navigate(`/product/${totalPage}`);
-      getData(totalPage);
     }
   }, [page, totalPage]);
   validCurrentPage.current = Math.min(!isNaN(+page) ? +page : 1, totalPage);

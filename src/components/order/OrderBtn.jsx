@@ -8,7 +8,6 @@ import { checkoutCart } from "../../redux/slice/productSlice";
 
 export default function OrderBtn({ isPages, data, sale }) {
     const inputValue = useSelector((state) => state.products.inputValue);
-    const cartList = useSelector((state) => state.products.cartList);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

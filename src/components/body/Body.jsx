@@ -3,7 +3,6 @@ import Home from "../../pages/home/Home";
 import { Routes, Route } from "react-router-dom";
 import ProductDetails from "../../pages/productDetails/ProductDetails";
 import Cart from "../../pages/cart/Cart";
-import { useSelector } from "react-redux";
 import Error from "../../pages/error/Error";
 
 export default function Body() {
