@@ -2,9 +2,9 @@ import React from "react";
 import clsx from "clsx";
 import style from "./CartAddBtn.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { addCart } from "../../redux/slice/productSlice";
+import { addCart, getValue } from "../../redux/slice/productSlice";
 
-export default function CartAddBtn({ data, sale }) {
+export default function CartAddBtn({ data, sale, isPages }) {
     const inputValue = useSelector((state) => state.products.inputValue);
     const dispatch = useDispatch();
     const handleClick = (e) => {
@@ -22,6 +22,9 @@ export default function CartAddBtn({ data, sale }) {
             sale: sale,
         };
         dispatch(addCart(product));
+        if (isPages === "details") {
+            dispatch(getValue({boolean: true}));
+        }
     };
     return (
         <button

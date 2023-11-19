@@ -5,6 +5,7 @@ import { getValue, editCart } from "../../redux/slice/productSlice";
 
 export default function QuantityInput({ isPages, data }) {
     const inputValue = useSelector((state) => state.products.inputValue);
+    const isAddCartBtn = useSelector((state) => state.products.isAddCartBtn);
     const dispatch = useDispatch();
     const [value, setValue] = useState(1);
 
@@ -21,6 +22,7 @@ export default function QuantityInput({ isPages, data }) {
         if (value > 1) {
             setValue(value - 1);
         }
+        if (isPages === "details") {}
     };
     const handleIncrement = () => {
         if (value < 999) {
@@ -39,10 +41,15 @@ export default function QuantityInput({ isPages, data }) {
             if (isPages === "cart") {
                 dispatch(editCart({ ...data, quantity: value }));
             } else if (isPages === "details") {
-                dispatch(getValue(value));
+                dispatch(getValue({value: value, boolean: false}));
             }
         }
     }, [value]);
+    useEffect(() => {
+        if (isAddCartBtn && isPages === "details") {
+          setValue(1);
+        }
+    }, [isAddCartBtn]);
     return (
         <>
             <button onClick={handleDecrement}>-</button>
