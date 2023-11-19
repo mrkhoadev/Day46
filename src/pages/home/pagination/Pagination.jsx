@@ -13,8 +13,8 @@ export default function Pagination() {
   const totalPage = useSelector((state) => state.products.totalPage);
   const { page } = useParams();
   const navigate = useNavigate();
-  const validCurrentPage = useRef(Math.min(!isNaN(+page) ? +page : 1, totalPage));
-  const getData = async (pageParams) => {
+  const validCurrentPage = useRef(0);
+  const getData = (pageParams) => {
     dispatch(
       getProducts({
         limit: PAGE_LIMIT,
@@ -24,18 +24,18 @@ export default function Pagination() {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const pageParams = +page;
-      if (!isNaN(pageParams) && pageParams > 0 && pageParams <= totalPage) {
-        await getData(pageParams);
-      } else {
-        navigate(`/product/1`);
-        await getData(1);
-      }
-    };
-
-    fetchData();
-  }, [page]);
+    const pageParams = +page;
+    if (!isNaN(pageParams) && pageParams > 0) {
+      getData(pageParams);
+    } else {
+      navigate(`/product/1`);
+      getData(1);
+    }
+    if (pageParams > totalPage && totalPage !== 0) {
+      navigate(`/product/${totalPage}`);
+      getData(totalPage);
+    }
+  }, [page, totalPage]);
   validCurrentPage.current = Math.min(!isNaN(+page) ? +page : 1, totalPage);
   const handlePageClick = (event) => {
     navigate(`/product/${event.selected + 1}`);

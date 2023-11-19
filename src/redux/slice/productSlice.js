@@ -80,8 +80,8 @@ export const productSlice = createSlice({
         builder
             //getProducts
             .addCase(getProducts.fulfilled, (state, action) => {
-                state.productList = action.payload.data.listProduct;
                 state.totalPage = action.payload.data.totalPage
+                state.productList = action.payload.data.listProduct;
                 state.status = "success";
             })
             .addCase(getProducts.pending, (state) => {
