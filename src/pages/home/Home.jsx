@@ -3,9 +3,10 @@ import clsx from "clsx";
 import style from "./Home.module.scss";
 import Products from "./products/Products";
 import Pagination from "./pagination/Pagination";
-import { useParams } from "react-router-dom";
+import { useOutlet, useParams } from "react-router-dom";
 
 export default function Home() {
+    const outlet = useOutlet();
     return (
         <div className={clsx(style["app-home"])}>
             <div className={clsx(style["home-title"])}>
